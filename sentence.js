@@ -43,7 +43,16 @@ if(number == "undefined"){
   console.log(number)
 }
 var digits = number.split("")
-var template = "My heart was"
+var template = "My heart is"
+if(digits[0] == 3){
+  if(Math.round(Math.random())){
+    template += " one";
+  } /*else {
+    template += " the";
+  }*/
+
+  digits.shift();
+}
 if (digits.length < 5){
   for(j = 0; j < digits.length - 1 ; j++){
     template += " {{ adjective_l("+digits[j]+") }}"
