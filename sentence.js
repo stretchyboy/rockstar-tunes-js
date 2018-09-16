@@ -35,50 +35,80 @@ Sentencer.configure({
   }
 });
 
-
-
 var number = '' + process.argv[2];
 if (number == "undefined") {
   number = '' + Math.round(Math.random() * 9999);
-  console.log(number)
+  console.log("Generating sentence for ",number);
 }
-var digits = number.split("")
-var template = "My heart is"
 
-if (digits[0] == 3) {
-  if (Math.round(Math.random())) {
-    template += " one";
+var init = '' + process.argv[3];
+if (init == "undefined") {
+  init = "My heart is";
+  console.log("Starting with", init);
+}
+
+function getFragment(number, first) {
+  var digits = number.split("");
+  var template = '';
+  if (digits[0] == 3) {
+    if (first) {
+      template += " one";
+    } else {
+      template += " and";
+    }
+    digits.shift();
   }
-  /*else {
-     template += " the";
-   }*/
-  digits.shift();
-}
 
-if (digits.length < 5) {
-  for (j = 0; j < digits.length - 1; j++) {
-    template += " {{ adjective_l(" + digits[j] + ") }}"
+  if (digits.length < 5) {
+    for (j = 0; j < digits.length - 1; j++) {
+      template += " {{ adjective_l(" + digits[j] + ") }}"
+    }
+    template += " {{ noun_l(" + digits[digits.length - 1] + ") }}"
   }
-  template += " {{ noun_l(" + digits[digits.length - 1] + ") }}"
+  return template
 }
 
-function getSentence(number) {
+function getTemplate(start, number) {
+  var template = start;
+  parts = number.split(".");
+  var first = true
+  template += parts.map(function(part) {
+    var frag = getFragment(part, first);
+    first = false;
+    return frag;
+  }).join(".");
+  return template;
+}
+
+const rockstar = require('./src/rockstar');
+
+function getWords(number, template) {
+
   var heart = 0;
-  while (heart != parseFloat(number)) {
+  var tries = 0;
+  while (heart != parseFloat(number) && tries < 10) {
+    tries++;
     var words = Sentencer.make(template);
     //console.log(words);
 
-    const rockstar = require('./src/rockstar');
     try {
       eval(rockstar.compile(words + "\n")) //Whisper my heart\n"));
     } catch (err) {
-      console.log("didnt like", words)
+      console.log("Didn't like '" + words + "'")
     }
     //console.log("heart", heart)
   }
   return words;
 }
 
+function getSentence(start, num){
+  var template = getTemplate(start, num);
+  //console.log(template);
+  var sentence = getWords(num, template);
+  //console.log(sentence)
+  return sentence;
+}
+
 for (k = 0; k < 5; k++) {
-  console.log(getSentence(number));
+  console.log(getSentence(init, number));
 }
