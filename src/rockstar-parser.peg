@@ -120,17 +120,17 @@ Set = v:Variable _ ('is'/'was'/'were') _ e:Expression
 Put = 'Put' _ e:Expression _ 'into' _ v:Variable
 	{ return {t: 'Set', v: v, e} }
 
-OpenW = 'Open' _ f:Variable _ ('to') _ e:Expression
-	{ return {t: 'Open', m:'write', f, e} }
-OpenR = 'Open' _ f:Variable _ ('from') _ e:Expression
-	{ return {t: 'Open', m:'read', f, e} }
-OpenA = 'Open' _ f:Variable _ ('of') _ e:Expression
-	{ return {t: 'Open',  m:'append', f, e} }
+OpenW = 'Open' _ v:Variable _ ('to') _ e:Expression
+	{ return {t: 'Open', m:'write', v:v, e} }
+OpenR = 'Open' _ v:Variable _ ('from') _ e:Expression
+	{ return {t: 'Open', m:'read', v:v, e} }
+OpenA = 'Open' _ v:Variable _ ('of') _ e:Expression
+	{ return {t: 'Open',  m:'append', v:v, e} }
 See = 'See' _ v:Variable _ ('on'/'in'/'upon'/'across') _ f:Variable
 	{ return {t: 'Read', v: v, f} }
 Read = 'Read' _ f:Variable _ ('to') _ v:Variable
 	{ return {t: 'Read', v: v, f} }
 Write = ('Write'/'Carve'/'Sign'/'Scrawl'/'Type') _ e:Expression _ ('to'/'on'/'in'/'upon'/'across') _ f:Variable
 	{ return {t: 'Write', f, e} }
-Close = ('Close'/'Lock'/'Shut') _ f:Variable _ ('down'/'up'/'shut')
+Close = ('Close'/'Lock'/'Shut') _ f:Variable
 	{ return {t: 'Close', f:f} }

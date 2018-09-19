@@ -49,7 +49,7 @@ const generators = {
 	Say: s=>`console.log(${expr(s.e)});`,
 	Listen: ({ v }) => `${varname(v.n)} = $readLineSync();`,
 
-	Open: ({ o }) => `${varname(o.f)} = $openFileSync(${expr(o.e)}, ${o.m});`,
+	Open: ({ v }) => `${varname(v.n)} = $openFileSync(${expr(v.e)}, ${v.m});`,
 	Read: ({ r }) => `${varname(r.v)} = $readFileSync(${varname(r.f)});`,
 	Write: ({ w }) => `$writeFileSync(${varname(w.f)}, ${expr(w.e)} );`,
 	Close: ({ z }) => `$closeFileSync(${varname(z.f)});`
