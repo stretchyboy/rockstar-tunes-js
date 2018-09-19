@@ -1,6 +1,6 @@
 Program = Statement *
 Statement = _? s:(FunctionDeclaration/Operation/BlankLine) ','? _* '\n' {return s}
-Operation = Loop / If / ArithmeticStatement / GiveBack / Set / Put / Listen / Say / Continue / Break / PoeticString
+Operation = Loop / If / ArithmeticStatement / GiveBack / Set / Put / Listen / Say / OpenW / OpenR / OpenA / See / Read / Write / Close / Continue / Break / PoeticString
 _ = ((' ' / '\t')+) / Comment
 Comment = '(' [^)]* ')'
 
@@ -73,6 +73,8 @@ Listen = 'Listen' _ 'to' _ v:Variable
 Say = ('Say'/'Shout'/'Whisper'/'Scream') _ e:Expression
 	{return {t:'Say', e}}
 
+
+
 If = 'If' _ e:Expression
 	{ return {t: 'If', e} }
 Else = 'Else' {return {t: 'Else'}}
@@ -84,7 +86,7 @@ Break = ('Break' / ('Break'_'it'_'down')) {return {t: 'Break'}}
 
 FunctionDeclaration = n:Variable _ 'takes' _ a:FunctionDeclarationArguments
 	{ return {t: 'FunctionDeclaration', n, a: a.map(a => a.n)} }
-FunctionDeclarationArguments = 
+FunctionDeclarationArguments =
 	a:Variable (_'and'_ / _?','_?) b:FunctionDeclarationArguments { return [a].concat(b) }
     / a:Variable { return [a] }
 GiveBack = 'Give back' _ e:Expression
@@ -95,7 +97,7 @@ BlankLine = '' {return {t: 'BlankLine'}}
 FunctionCall = f:Variable _ 'taking' _ a:FunctionCallArguments
 	{ return {t: 'FunctionCall', f, a} }
 // TODO 'and' is overloaded, so can't use full Expression syntax
-FunctionCallArguments = 
+FunctionCallArguments =
 	a:SimpleExpression (_'and'_ / _?','_?) b:FunctionCallArguments { return [a].concat(b) }
     / a:SimpleExpression { return [a] }
 
@@ -117,3 +119,18 @@ Set = v:Variable _ ('is'/'was'/'were') _ e:Expression
 	{ return {t: 'Set', v: v, e} }
 Put = 'Put' _ e:Expression _ 'into' _ v:Variable
 	{ return {t: 'Set', v: v, e} }
+
+OpenW = 'Open' _ f:Variable _ ('to') _ e:Expression
+	{ return {t: 'Open', m:'write', f, e} }
+OpenR = 'Open' _ f:Variable _ ('from') _ e:Expression
+	{ return {t: 'Open', m:'read', f, e} }
+OpenA = 'Open' _ f:Variable _ ('of') _ e:Expression
+	{ return {t: 'Open',  m:'append', f, e} }
+See = 'See' _ v:Variable _ ('on'/'in'/'upon'/'across') _ f:Variable
+	{ return {t: 'Read', v: v, f} }
+Read = 'Read' _ f:Variable _ ('to') _ v:Variable
+	{ return {t: 'Read', v: v, f} }
+Write = ('Write'/'Carve'/'Sign'/'Scrawl'/'Type') _ e:Expression _ ('to'/'on'/'in'/'upon'/'across') _ f:Variable
+	{ return {t: 'Write', f, e} }
+Close = ('Close'/'Lock'/'Shut') _ f:Variable _ ('down'/'up'/'shut')
+	{ return {t: 'Close', f:f} }

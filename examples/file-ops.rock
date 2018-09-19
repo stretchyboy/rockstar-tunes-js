@@ -1,0 +1,35 @@
+(File op example)
+My love is "output.txt"
+Hell is "listen.rock"
+My heart is "append.txt"
+
+Open your heart to my love (write mode, assigns your heart as the file handle/accessor opening the file which is pointed at by my love)
+Open the door from Hell (read mode)
+Open the eyes of my heart (append mode)
+
+The wall is Hell
+Your book is Hell
+
+(Read line)
+See the writing on the wall ( this version reads file accessor/ file handle the wall and puts the next line into the writing)
+Read your book to Joe ( this is the other way around your book is the file accessor and Joe the variable the line is assigned to)
+
+Your letter is "Zed"
+John is my love
+
+(Write line)
+
+Write your letter to John (content of your letter written to the file accessor John)
+Write your tears on the page (content of your tears written to the page)
+
+(Aliases for Write are Carve, Sign, Scrawl, Type)
+(in, on, upon and across are interchangeable ?)
+
+Your name is "Joanne"
+
+Sign your name across my heart
+
+(File close)
+Close your heart down
+Shut the door up
+Lock my heart up
