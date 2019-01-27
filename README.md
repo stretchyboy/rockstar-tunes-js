@@ -1,4 +1,5 @@
 This is a work-in-progress implementation of the [Rockstar](https://github.com/dylanbeattie/rockstar) language.
+With extra tools for trying to get actual work done in rockstar.
 
 It transpiles Rockstar code to JavaScript.
 
@@ -58,3 +59,15 @@ and returns this code:
 ```javascript
 Billy="hello world!";
 ```
+
+
+## Sentence generators
+
+Building Poetic Number sentences automatically
+
+```bash
+node sentence.js [Number:randomly generated] [StartofSentence:"My heart is"]
+node sentence2.js [Number:randomly generated] [StartofSentence:"My heart is") [MaximumSyllablesInLine:16)
+```
+
+sentence2 uses a the wonderful  (Datamuse API)[https://www.datamuse.com/api/] to stitch together vaguely sensible sentences.
