@@ -70,4 +70,4 @@ node sentence.js [Number:randomly generated] [StartofSentence:"My heart is"]
 node sentence2.js [Number:randomly generated] [StartofSentence:"My heart is") [MaximumSyllablesInLine:16)
 ```
 
-sentence2 uses a the wonderful  (Datamuse API)[https://www.datamuse.com/api/] to stitch together vaguely sensible sentences.
+sentence2 uses a the wonderful  [Datamuse API](https://www.datamuse.com/api/) to stitch together vaguely sensible sentences.
