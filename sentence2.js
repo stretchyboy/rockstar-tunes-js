@@ -60,7 +60,18 @@ function getWords(number, template) {
   return words;
 }
 
+function moveTags(word){
+  if(word.tags){
+    word.tags.forEach((tag)=>{
+      parts = tag.split(":")
+      if(parts.length>1){
+        word[parts[0]] =parts[1]
+      }
+    })
+  }
+  return word;
 
+}
 function getNextWord(sSentence, sTopics, sNumber, iPos, sLastWord, iSyllables, bBoost) {
   iNum = parseInt(sNumber[iPos])
 
@@ -72,7 +83,7 @@ function getNextWord(sSentence, sTopics, sNumber, iPos, sLastWord, iSyllables, b
   datamuse.words({
     rel_bga: sLastWord,
     sp: "?".repeat(iTarget),
-    md: "srp",
+    md: "srpf",
     topics: sTopics
   }).then((json) => {
     possibles = json.filter((item, i) => {
@@ -88,7 +99,7 @@ function getNextWord(sSentence, sTopics, sNumber, iPos, sLastWord, iSyllables, b
         return false;
       }
       return true
-    })
+    }).map(moveTags).sort((a,b)=>{return b.f-a.f})
 
     iPos++
 
