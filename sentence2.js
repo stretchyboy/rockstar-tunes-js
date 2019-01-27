@@ -95,7 +95,7 @@ function getNextWord(sSentence, sTopics, sNumber, iPos, sLastWord, iSyllables, b
       if (item.word.replace(/\W/, "").length == 0) {
         return false;
       }
-      if (i > Math.ceil(Math.pow(20, 1.0/(sNumber.length)))) {
+      if (i > Math.ceil(Math.pow(30, 1.0/(sNumber.length)))) {
         return false;
       }
       return true
