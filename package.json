@@ -15,17 +15,11 @@
   },
   "dependencies": {
     "cmu-pronouncing-dictionary": "^1.0.3",
-    "datamuse": "^1.0.5",
-    "grammarland": "^1.1.9",
-    "iconv": "^2.3.2",
-    "node-window-polyfill": "^1.0.0",
-    "sentencer": "^0.1.5",
-    "write-good": "^1.0.1"
+    "sentencer": "^0.2.1"
   },
   "devDependencies": {
-    "mocha": "^5.2.0",
-    "pegjs": "^0.10.0",
-    "window-mock": "0.0.13"
+    "mocha": "^11.3.0",
+    "pegjs": "^0.10.0"
   },
   "scripts": {
     "build": "pegjs src/rockstar-parser.peg",

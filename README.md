@@ -66,8 +66,9 @@ Billy="hello world!";
 Building Poetic Number sentences automatically
 
 ```bash
-node sentence.js [Number:randomly generated] [StartofSentence:"My heart is"]
-node sentence2.js [Number:randomly generated] [StartofSentence:"My heart is") [MaximumSyllablesInLine:16)
+node sentence.js [VariableName:"My heart"] [Assignment:is] [Number:randomly generated]
+node sentence2.js [VariableName:"My heart"] [Assignment:is] [Number:randomly generated] [MaximumSyllablesInLine:16] [Theme:glam,metal]
 ```
 
 sentence2 uses a the wonderful  [Datamuse API](https://www.datamuse.com/api/) to stitch together vaguely sensible sentences.
+When a theme is selected, automatic fallback starts can also draw from theme-specific proper names.
